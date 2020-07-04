@@ -1,0 +1,33 @@
+{
+    "name": "haxibiao/nova",
+    "description": "nova的扩展.",
+    "keywords": [
+        "laravel",
+        "nova"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Haxibiao\\Nova\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Haxibiao\\Nova\\CardServiceProvider",
+                "Haxibiao\\Nova\\QViewerServiceProvider",
+                "Haxibiao\\Nova\\FieldServiceProvider",
+                "Haxibiao\\Nova\\EditorServiceProvider",
+                "Haxibiao\\Nova\\ShuaziServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
