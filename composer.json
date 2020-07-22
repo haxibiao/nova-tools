@@ -1,6 +1,6 @@
 {
     "name": "haxibiao/nova",
-    "description": "nova的扩展.",
+    "description": "哈希表扩展后台能力的 nova tools",
     "keywords": [
         "laravel",
         "nova"
