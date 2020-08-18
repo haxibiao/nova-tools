@@ -1,4 +1,12 @@
 {
     "/js/card.js": "/js/card.js",
-    "/css/card.css": "/css/card.css"
+    "/js/editor.js": "/js/editor.js",
+    "/js/field.js": "/js/field.js",
+    "/js/qviewer.js": "/js/qviewer.js",
+    "/css/qviewer.css": "/css/qviewer.css",
+    "/css/card.css": "/css/card.css",
+    "/css/field.css": "/css/field.css",
+    "/css/editor.css": "/css/editor.css",
+    "/css/shuazi.css": "/css/shuazi.css",
+    "/js/shuazi.js": "/js/shuazi.js"
 }

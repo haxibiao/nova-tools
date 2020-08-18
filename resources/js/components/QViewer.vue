@@ -176,12 +176,12 @@ export default {
       explanation: null,
       description: "",
       audioFile: null,
-      disableUpload: false
+      disableUpload: false,
     };
   },
 
   watch: {
-    json: function() {
+    json: function () {
       if (this.json == "") {
         this.alertStatus = "info";
         return (this.status = "待输入");
@@ -196,18 +196,18 @@ export default {
 
       this.canSubmit = true;
     },
-    explanationContent: function() {
+    explanationContent: function () {
       this.explainCanSubmit =
         this.explanationContent.length >= 10 && !this.explaninSubmied;
     },
-    showExplain: function() {
+    showExplain: function () {
       this.pick = this.showExplain[0];
       this.canSubmit = false;
-    }
+    },
   },
 
   methods: {
-    uploadQuestionVideoFile: function(e) {
+    uploadQuestionVideoFile: function (e) {
       var _this = this;
       _this.canSubmit = false;
       _this.videoFile = e.target.files[0];
@@ -219,7 +219,7 @@ export default {
       let token = this.api_token;
       if (token == null) {
         return _this.$toasted.show("身份获取失败,请刷新后再试!", {
-          type: "error"
+          type: "error",
         });
       }
 
@@ -227,13 +227,13 @@ export default {
         "http://upload.datizhuanqian.com/api/video/upload?api_token=" + token;
       Nova.request()
         .post(videoUploadApi, formData, {
-          onUploadProgress: function(progressEvent) {
+          onUploadProgress: function (progressEvent) {
             _this.uploadProgressValue = Math.round(
               (progressEvent.loaded * 100) / progressEvent.total
             );
-          }
+          },
         })
-        .then(response => {
+        .then((response) => {
           _this.video = response.data;
           if (_this.json != "") {
             _this.canSubmit = true;
@@ -241,7 +241,7 @@ export default {
         });
     },
 
-    uploadAudio: function(e) {
+    uploadAudio: function (e) {
       var _this = this;
       _this.canSubmit = false;
       _this.audioFile = e.target.files[0];
@@ -251,7 +251,7 @@ export default {
       let token = this.api_token;
       if (token == null) {
         return _this.$toasted.show("身份获取失败,请刷新后再试!", {
-          type: "error"
+          type: "error",
         });
       }
 
@@ -262,13 +262,13 @@ export default {
       var audioUploadApi = "http://upload.datizhuanqian.com/api/audio";
       Nova.request()
         .post(audioUploadApi, formData, {
-          onUploadProgress: function(progressEvent) {
+          onUploadProgress: function (progressEvent) {
             _this.audioUploadProgressValue = Math.round(
               (progressEvent.loaded * 100) / progressEvent.total
             );
-          }
+          },
         })
-        .then(response => {
+        .then((response) => {
           _this.audio = response.data.data;
           console.log(_this.audio);
           if (_this.json != "") {
@@ -277,7 +277,7 @@ export default {
         });
     },
 
-    submitQuestion: function() {
+    submitQuestion: function () {
       var _this = this;
       var json = JSON.parse(this.json);
       if (this.video != null) {
@@ -300,15 +300,15 @@ export default {
 
       Nova.request()
         .post(this.api, {
-          json
+          json,
         })
-        .then(response => {
+        .then((response) => {
           let data = response.data;
           console.log(data);
           if (data.code == 200) {
             var text = "发表成功,题目ID:" + data.data.id;
             _this.$toasted.show(text, { type: "success" });
-            setTimeout(function() {
+            setTimeout(function () {
               location.reload();
             }, 500);
           }
@@ -316,7 +316,7 @@ export default {
       // _this.canSubmit = false;
     },
 
-    isJsonString: function(str) {
+    isJsonString: function (str) {
       try {
         if (typeof JSON.parse(str) == "object") {
           return true;
@@ -325,30 +325,30 @@ export default {
       return false;
     },
 
-    getUserToken: function(id) {
+    getUserToken: function (id) {
       var _this = this;
       var userInfoApi = "/api/nova/users/" + id;
 
       Nova.request()
         .get(userInfoApi)
-        .then(response => {
+        .then((response) => {
           return (_this.api_token = response.data);
         });
       return _this.api_token;
     },
 
-    submitExplanation: function() {
+    submitExplanation: function () {
       var _this = this;
 
       var explanation = {
-        content: _this.explanationContent
+        content: _this.explanationContent,
       };
 
       Nova.request()
         .post(_this.explanationApi, {
-          explanation
+          explanation,
         })
-        .then(response => {
+        .then((response) => {
           var data = response.data;
           _this.explainCanSubmit = false;
           _this.explaninSubmied = true;
@@ -358,13 +358,14 @@ export default {
           }
           _this.explanation = data.data;
           _this.pick = false;
+          _this.canSubmit = true;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style scoped src="../../../../../public/css/app.css"></style>
+<style scoped src="../../sass/bootstrap.css"></style>
 <style>
 .status {
   font-weight: bold;
