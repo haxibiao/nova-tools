@@ -1,14 +1,27 @@
 <template>
   <div>
     <heading class="mb-6">创建题目</heading>
-    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+    <div
+      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2"
+    >
       <!-- <h3 class="test">创建题目</h3> -->
       <form>
         <div class="form-group">
           <label for="json">题目数据(Json)</label>
-          <textarea class="form-control" id="json" rows="15" placeholder="请输入数据" v-model="json"></textarea>
+          <textarea
+            class="form-control"
+            id="json"
+            rows="15"
+            placeholder="请输入数据"
+            v-model="json"
+          ></textarea>
           <label for="json">题干(支持换行)</label>
-          <textarea class="form-control" rows="3" placeholder="请输入题干" v-model="description"></textarea>
+          <textarea
+            class="form-control"
+            rows="3"
+            placeholder="请输入题干"
+            v-model="description"
+          ></textarea>
         </div>
         <div class="form-group">
           <div :class="'alert alert-' + alertStatus" role="alert">
@@ -27,12 +40,11 @@
               :disabled="videoUpload || disableUpload"
               @change="uploadQuestionVideoFile($event)"
             />
-            <label class="custom-file-label custom-video-file-label" for="video">
-              {{
-              videoFile != null
-              ? videoFile.name
-              : "待选择视频"
-              }}
+            <label
+              class="custom-file-label custom-video-file-label"
+              for="video"
+            >
+              {{ videoFile != null ? videoFile.name : "待选择视频" }}
             </label>
           </div>
           <div class="alert alert-success" role="alert" v-if="video">
@@ -49,7 +61,9 @@
               :aria-valuenow="uploadProgressValue"
               aria-valuemin="0"
               aria-valuemax="100"
-            >{{ uploadProgressValue + "%" }}</div>
+            >
+              {{ uploadProgressValue + "%" }}
+            </div>
           </div>
         </div>
 
@@ -65,12 +79,11 @@
               :disabled="audioUpload"
               @change="uploadAudio($event)"
             />
-            <label class="custom-file-label custom-audio-file-label" for="audio">
-              {{
-              audioFile != null
-              ? audioFile.name
-              : "待选择音频"
-              }}
+            <label
+              class="custom-file-label custom-audio-file-label"
+              for="audio"
+            >
+              {{ audioFile != null ? audioFile.name : "待选择音频" }}
             </label>
           </div>
           <div class="alert alert-success" role="alert" v-if="audio">
@@ -87,25 +100,64 @@
               :aria-valuenow="audioUploadProgressValue"
               aria-valuemin="0"
               aria-valuemax="100"
-            >{{ audioUploadProgressValue + "%" }}</div>
+            >
+              {{ audioUploadProgressValue + "%" }}
+            </div>
+          </div>
+        </div>
+
+        <!-- 图片上传 -->
+        <div class="form-group upload-control">
+          <div class="custom-file">
+            <input
+              type="file"
+              class="custom-file-input"
+              name="audio"
+              id="audio"
+              accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"
+              :disabled="imageUpload"
+              @change="uploadImage($event)"
+            />
+            <label
+              class="custom-file-label custom-image-file-label"
+              for="audio"
+            >
+              {{ imageFile != null ? imageFile.name : "待选择图片" }}
+            </label>
+          </div>
+          <div class="alert alert-success" role="alert" v-if="image.url">
+            上传成功,图片链接：
+            <span>
+              <a :href="image.url">{{ image.url }}</a>
+            </span>
+          </div>
+          <div class="progress" v-if="imageUpload">
+            <div
+              class="progress-bar"
+              role="progressbar"
+              :style="'width:' + imageUploadProgressValue + '%'"
+              :aria-valuenow="imageUploadProgressValue"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              {{ imageUploadProgressValue + "%" }}
+            </div>
           </div>
         </div>
 
         <form class="form-group">
-          <div
-            class="alert alert-success"
-            role="alert"
-            v-if="explanation"
-          >提交成功,解析ID：{{ explanation.id }}</div>
+          <div class="alert alert-success" role="alert" v-if="explanation">
+            提交成功,解析ID：{{ explanation.id }}
+          </div>
         </form>
 
         <div class="form-group upload-control">
           <div
             :class="
-                            pick
-                                ? 'form-group  question-explain show-explain'
-                                : 'hide-explain'
-                        "
+              pick
+                ? 'form-group  question-explain show-explain'
+                : 'hide-explain'
+            "
           >
             <div class="form-group">
               <label for="explain-json">解析内容</label>
@@ -123,14 +175,21 @@
                 type="button"
                 :disabled="!explainCanSubmit"
                 @click="submitExplanation"
-              >提交解析</button>
+              >
+                提交解析
+              </button>
             </div>
           </div>
         </div>
 
         <div class="form-group bottom">
           <label class="checkbox-inline">
-            <input type="checkbox" id="inlineCheckbox1" value="true" v-model="showExplain" />
+            <input
+              type="checkbox"
+              id="inlineCheckbox1"
+              value="true"
+              v-model="showExplain"
+            />
             添加解析
           </label>
           <button
@@ -138,7 +197,9 @@
             class="btn btn-primary btn-lg submit-btn"
             :disabled="!canSubmit"
             @click="submitQuestion"
-          >提交</button>
+          >
+            提交
+          </button>
         </div>
       </form>
     </div>
@@ -158,10 +219,14 @@ export default {
       status: "待输入",
       uploadProgressValue: 0,
       audioUploadProgressValue: 0,
+      imageUploadProgressValue: 0,
       videoFile: null,
       explanationVideoFile: null,
       video: null,
       audio: null,
+      image: {
+        url: "",
+      },
       canSubmit: false,
       explainCanSubmit: false,
       explaninSubmied: false,
@@ -170,12 +235,14 @@ export default {
       alertStatus: "info",
       videoUpload: false,
       audioUpload: false,
+      imageUpload: false,
       api_token: "",
       showExplain: [],
       pick: false,
       explanation: null,
       description: "",
       audioFile: null,
+      imageFile: null,
       disableUpload: false,
     };
   },
@@ -270,7 +337,42 @@ export default {
         })
         .then((response) => {
           _this.audio = response.data.data;
-          console.log(_this.audio);
+          if (_this.json != "") {
+            _this.canSubmit = true;
+          }
+        });
+    },
+
+    uploadImage(e) {
+      var _this = this;
+      _this.canSubmit = false;
+      _this.imageFile = e.target.files[0];
+      _this.imageUpload = true;
+      _this.disableUpload = true;
+
+      let token = this.api_token;
+      if (token == null) {
+        return _this.$toasted.show("身份获取失败,请刷新后再试!", {
+          type: "error",
+        });
+      }
+
+      let formData = new FormData();
+      formData.append("photo", _this.imageFile);
+      formData.append("api_token", token);
+
+      var imageUploadApi = "http://upload.datizhuanqian.com/api/image";
+      Nova.request()
+        .post(imageUploadApi, formData, {
+          onUploadProgress: function (progressEvent) {
+            _this.imageUploadProgressValue = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+          },
+        })
+        .then((response) => {
+          _this.image.url = response.data;
+          console.log(_this.image);
           if (_this.json != "") {
             _this.canSubmit = true;
           }
@@ -304,7 +406,6 @@ export default {
         })
         .then((response) => {
           let data = response.data;
-          console.log(data);
           if (data.code == 200) {
             var text = "发表成功,题目ID:" + data.data.id;
             _this.$toasted.show(text, { type: "success" });
@@ -385,6 +486,10 @@ export default {
 
 .custom-audio-file-label::after {
   content: "选择音频" !important;
+}
+
+.custom-image-file-label::after {
+  content: "选择图片" !important;
 }
 
 .custom-file-explain {
