@@ -125,7 +125,7 @@
               {{ imageFile != null ? imageFile.name : "待选择图片" }}
             </label>
           </div>
-          <div class="alert alert-success" role="alert" v-if="image.url">
+          <div class="alert alert-success" role="alert" v-if="image">
             上传成功,图片链接：
             <span>
               <a :href="image.url">{{ image.url }}</a>
@@ -224,9 +224,7 @@ export default {
       explanationVideoFile: null,
       video: null,
       audio: null,
-      image: {
-        url: "",
-      },
+      image: null,
       canSubmit: false,
       explainCanSubmit: false,
       explaninSubmied: false,
@@ -291,7 +289,8 @@ export default {
       }
 
       var videoUploadApi =
-        "http://upload.datizhuanqian.com/api/video/upload?api_token=" + token;
+        "http://upload.datizhuanqian.com/api/video/upload?api_token=" +
+        token;
       Nova.request()
         .post(videoUploadApi, formData, {
           onUploadProgress: function (progressEvent) {
@@ -361,7 +360,7 @@ export default {
       formData.append("photo", _this.imageFile);
       formData.append("api_token", token);
 
-      var imageUploadApi = "http://upload.datizhuanqian.com/api/image";
+      var imageUploadApi = "http://upload.datizhuanqian.com/api/image?from=post";
       Nova.request()
         .post(imageUploadApi, formData, {
           onUploadProgress: function (progressEvent) {
@@ -371,7 +370,7 @@ export default {
           },
         })
         .then((response) => {
-          _this.image.url = response.data;
+          _this.image = response.data;
           console.log(_this.image);
           if (_this.json != "") {
             _this.canSubmit = true;
@@ -388,6 +387,10 @@ export default {
 
       if (this.audio != null) {
         json.audio_id = _this.audio.id;
+      }
+
+      if (this.image != null) {
+        json.image_id = _this.image.id;
       }
 
       //解析
