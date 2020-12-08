@@ -83,7 +83,7 @@ Route::any('/', function (Request $request) {
     $question->save();
 
     if ($question->id) {
-        return successful_response(200, $question);
+        return successful_response($question);
     }
 
     throw new UserException('发布失败');
@@ -101,6 +101,6 @@ Route::any('/submit-explanation', function (Request $request) {
     $explanation->user_id = auth()->id();
     $explanation->save();
 
-    return successful_response(200, $explanation);
+    return successful_response($explanation);
 
 });
