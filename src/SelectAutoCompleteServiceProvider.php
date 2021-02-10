@@ -1,13 +1,13 @@
 <?php
 
-namespace Haxibiao\Nova;
+namespace Techouse\SelectAutoComplete;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Nova;
 
-class CardServiceProvider extends ServiceProvider
+class SelectAutoCompleteServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
@@ -21,24 +21,18 @@ class CardServiceProvider extends ServiceProvider
         });
 
         Nova::serving(function (ServingNova $event) {
-            Nova::script('doughnut-chart', __DIR__ . '/../dist/js/card.js');
-            Nova::style('doughnut-chart', __DIR__ . '/../dist/css/card.css');
+            Nova::script('select-auto-complete', __DIR__ . '/../dist/js/select-auto-complete.js');
+            Nova::style('select-auto-complete', __DIR__ . '/../dist/css/select-auto-complete.css');
         });
     }
 
-    /**
-     * Register the card's routes.
-     *
-     * @return void
-     */
-    protected function routes()
+    public function routes()
     {
         if ($this->app->routesAreCached()) {
             return;
         }
-
         Route::middleware(['nova'])
-            ->prefix('nova-vendor/doughnut-chart')
+            ->prefix('nova-vendor/select-auto-complete')
             ->group(__DIR__ . '/../routes/api.php');
     }
 

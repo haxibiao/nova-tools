@@ -5,6 +5,7 @@ use App\Explanation;
 use App\Question;
 use App\User;
 use App\Wallet;
+use Haxibiao\Nova\Http\SelectAutoCompleteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
@@ -20,9 +21,11 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-// Route::get('/endpoint', function (Request $request) {
-//     //
-// });
+//选择自动完成
+Route::get('/js/{asset}.js', SelectAutoCompleteController::class . '@jsAsset')
+    ->name('select_auto_complete_js_asset');
+Route::get('/css/{asset}.css', SelectAutoCompleteController::class . '@cssAsset')
+    ->name('select_auto_complete_css_asset');
 
 //搜索用户，刷子查询用
 Route::get('/search-users', function (Request $reuqest) {

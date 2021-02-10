@@ -1,12 +1,20 @@
 {
     "/js/card.js": "/js/card.js",
     "/js/editor.js": "/js/editor.js",
-    "/js/field.js": "/js/field.js",
+    "/js/vuemultiselect.js": "/js/vuemultiselect.js",
     "/js/qviewer.js": "/js/qviewer.js",
     "/css/qviewer.css": "/css/qviewer.css",
     "/css/card.css": "/css/card.css",
-    "/css/field.css": "/css/field.css",
+    "/css/vuemultiselect.css": "/css/vuemultiselect.css",
     "/css/editor.css": "/css/editor.css",
     "/css/shuazi.css": "/css/shuazi.css",
-    "/js/shuazi.js": "/js/shuazi.js"
+    "/js/shuazi.js": "/js/shuazi.js",
+    "detail-select-auto-complete.js": "/nova-vendor/select-auto-complete/js/detail-select-auto-complete.js",
+    "field.css": "/nova-vendor/select-auto-complete/css/field.css",
+    "field.js": "/nova-vendor/select-auto-complete/js/field.js",
+    "form-select-auto-complete.js": "/nova-vendor/select-auto-complete/js/form-select-auto-complete.js",
+    "index-select-auto-complete.js": "/nova-vendor/select-auto-complete/js/index-select-auto-complete.js",
+    "vendors~form-select-auto-complete.css": "/nova-vendor/select-auto-complete/css/vendors~form-select-auto-complete.css",
+    "vendors~form-select-auto-complete.js": "/nova-vendor/select-auto-complete/js/vendors~form-select-auto-complete.js",
+    "js/vendors~form-select-auto-complete.js.LICENSE.txt": "/nova-vendor/select-auto-complete/js/vendors~form-select-auto-complete.js.LICENSE.txt"
 }

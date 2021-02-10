@@ -38,14 +38,16 @@ class EditorServiceProvider extends ServiceProvider
         }
 
         //先临时处理 后期优化成功controller
-        Route::middleware('nova')->prefix('nova-vendor/vue-editor')->group(function () {
-            Route::any('upload-image', function (Request $request) {
-                if ($imageFile = $request->file('image')) {
-                    $image = \App\Image::saveImage($imageFile);
-                    return ['url' => $image->url];
-                }
+        Route::middleware('nova')
+            ->prefix('nova-vendor/vue-editor')
+            ->group(function () {
+                Route::any('upload-image', function (Request $request) {
+                    if ($imageFile = $request->file('image')) {
+                        $image = \App\Image::saveImage($imageFile);
+                        return ['url' => $image->url];
+                    }
+                });
             });
-        });
     }
     /**
      * Register any application services.

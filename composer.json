@@ -1,5 +1,5 @@
 {
-    "name": "haxibiao/nova",
+    "name": "haxibiao/nova-tools",
     "description": "哈希表扩展后台能力的 nova tools",
     "keywords": [
         "laravel",
@@ -7,7 +7,9 @@
     ],
     "license": "MIT",
     "require": {
-        "php": ">=7.1.0"
+        "php": ">=7.1.0",
+        "haxibiao/nova": "*",
+        "laravel/framework": "^8.27"
     },
     "autoload": {
         "psr-4": {
@@ -17,8 +19,9 @@
     "extra": {
         "laravel": {
             "providers": [
+                "Haxibiao\\Nova\\SelectAutoCompleteServiceProvider",
                 "Haxibiao\\Nova\\CardServiceProvider",
-                "Haxibiao\\Nova\\QViewerServiceProvider",
+                "Haxibiao\\Nova\\QuestionViewerServiceProvider",
                 "Haxibiao\\Nova\\FieldServiceProvider",
                 "Haxibiao\\Nova\\EditorServiceProvider",
                 "Haxibiao\\Nova\\ShuaziServiceProvider"

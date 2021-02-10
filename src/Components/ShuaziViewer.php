@@ -1,6 +1,6 @@
 <?php
 
-namespace Haxibiao\Nova;
+namespace Haxibiao\Nova\Components;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Tool;

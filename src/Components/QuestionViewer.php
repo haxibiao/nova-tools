@@ -1,17 +1,15 @@
 <?php
 
-namespace Haxibiao\Nova;
+namespace Haxibiao\Nova\Components;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Tool;
 
 class QuestionViewer extends Tool
 {
-    /**
-     * Perform any tasks that need to happen when the tool is booted.
-     *
-     * @return void
-     */
+    public $name      = "创建题目";
+    public $component = 'question-viewer';
+
     public function boot()
     {
         Nova::script('haxibiao-nova', __DIR__ . '/../dist/js/qviewer.js');

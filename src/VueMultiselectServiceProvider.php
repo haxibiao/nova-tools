@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Nova;
 
-class FieldServiceProvider extends ServiceProvider
+class VueMultiselectServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
@@ -16,8 +16,8 @@ class FieldServiceProvider extends ServiceProvider
     public function boot()
     {
         Nova::serving(function (ServingNova $event) {
-            Nova::script('vue-multiselect', __DIR__ . '/../dist/js/field.js');
-            Nova::style('vue-multiselect', __DIR__ . '/../dist/css/field.css');
+            Nova::script('vue-multiselect', __DIR__ . '/../dist/js/vuemultiselect.js');
+            Nova::style('vue-multiselect', __DIR__ . '/../dist/css/vuemultiselect.css');
         });
     }
 

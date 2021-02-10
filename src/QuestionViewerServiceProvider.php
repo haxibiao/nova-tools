@@ -8,7 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Nova;
 
-class QViewerServiceProvider extends ServiceProvider
+class QuestionViewerServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.

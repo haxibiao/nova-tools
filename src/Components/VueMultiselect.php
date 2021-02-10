@@ -1,16 +1,13 @@
 <?php
 
-namespace Haxibiao\Nova;
+namespace Haxibiao\Nova\Components;
 
 use Laravel\Nova\Fields\Field;
 
 class VueMultiselect extends Field
 {
-    /**
-     * The field's component.
-     *
-     * @var string
-     */
+    public $name = 'VUE多选';
+
     public $component = 'vue-multiselect';
 
     public function options($value)
